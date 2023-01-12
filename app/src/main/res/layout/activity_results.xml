@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ResultsActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:background="@color/my_action_color"
+        android:layout_height="?actionBarSize">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="Your results"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/my_action_color"
+        android:layout_marginStart="24dp"
+        android:minHeight="160dp"
+        android:paddingTop="15dp"
+        android:paddingLeft="10dp"
+        android:paddingBottom="15dp"
+        android:layout_marginEnd="24dp"
+        android:layout_height="wrap_content">
+
+         <TextView
+             android:id="@+id/total_time_txt"
+             android:layout_gravity="top|start|center"
+             android:text="qwerty"
+             style="@style/ResultTextViewStyle" />
+
+         <TextView
+             android:id="@+id/total_questions_txt"
+             android:layout_gravity="start|center"
+             android:text="qwerty"
+             style="@style/ResultTextViewStyle"/>
+
+         <TextView
+             android:id="@+id/total_answers_txt"
+             android:layout_gravity="start|bottom|center"
+             android:text="qwerty"
+             style="@style/ResultTextViewStyle"/>
+
+    </FrameLayout>
+
+</FrameLayout>

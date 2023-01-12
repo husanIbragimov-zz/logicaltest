@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#009688"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+    
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_play"
+            android:text="Play"
+            style="@style/MenuButtonStyle"/>
+
+        <Button
+            android:id="@+id/btn_about"
+            android:text="About"
+            style="@style/MenuButtonStyle"/>
+
+        <Button
+            android:id="@+id/btn_exit"
+            android:text="Exit"
+            style="@style/MenuButtonStyle"/>
+
+    </LinearLayout>
+
+</FrameLayout>
