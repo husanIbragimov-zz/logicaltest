@@ -114,6 +114,7 @@
         <Button
             android:text="Back"
             android:id="@+id/close_btn"
+            android:background="@drawable/back_btn_back"
             style="@style/BackAndNextButtonStyle" />
 
         <TextView
@@ -124,6 +125,7 @@
         <Button
             android:text="Next"
             android:id="@+id/next_btn"
+            android:background="@drawable/next_btn_back"
             style="@style/BackAndNextButtonStyle" />
 
     </LinearLayout>
