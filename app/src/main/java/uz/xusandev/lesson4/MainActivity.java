@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
                 System.out.println("======================================== Hello Android Developer Play Button ========================================");
 
-                Intent intent = new Intent(MainActivity.this, TestGameActivity.class);
+                Intent intent = new Intent(MainActivity.this, ChooseSubjectsActivity.class);
 
                 startActivity(intent);
 

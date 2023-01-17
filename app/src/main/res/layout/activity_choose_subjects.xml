@@ -24,11 +24,6 @@
             android:id="@+id/btn_math"
             style="@style/ChooseSubjectsButton"/>
 
-        <Button
-            android:text="Mixin"
-            android:id="@+id/btn_mix"
-            style="@style/ChooseSubjectsButton"/>
-
     </LinearLayout>
 
 
