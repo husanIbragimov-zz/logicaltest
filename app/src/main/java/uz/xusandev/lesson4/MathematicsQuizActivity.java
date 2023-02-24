@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import uz.xusandev.lesson4.core.GameController;
 import uz.xusandev.lesson4.core.MathDataLoader;
@@ -24,6 +26,8 @@ public class MathematicsQuizActivity extends AppCompatActivity {
     private Button nextButton, closeButton;
     private String answerText = "";
 
+    private Timer timer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +38,42 @@ public class MathematicsQuizActivity extends AppCompatActivity {
         gameController.startGame();
 
         loadView();
+        startTimer();
 
         loadDataView();
 
         loadActions();
 
+    }
+
+    private long timeCount = 0;
+
+    private void startTimer() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                timeCount++;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setTimeToView();
+
+                    }
+                });
+
+            }
+        }, 1000, 1000);
+    }
+
+    private void setTimeToView() {
+
+        long second = timeCount % 60;
+        long minute = timeCount / 60 % 60;
+        long hour = timeCount / 60 / 60 % 24;
+
+        String result = String.format("%02d:%02d:%02d", hour, minute, second);
+        timeView.setText(result);
     }
 
     private void loadActions() {
@@ -161,4 +196,13 @@ public class MathematicsQuizActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        timer.cancel();
+
+        System.out.println("Hello: onStop Method");
+    }
+
 }
