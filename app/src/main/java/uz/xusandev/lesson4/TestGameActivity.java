@@ -12,6 +12,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import uz.xusandev.lesson4.core.DataLoader;
 import uz.xusandev.lesson4.core.GameController;
@@ -24,6 +26,8 @@ public class TestGameActivity extends AppCompatActivity {
     private Button nextButton, closeButton;
     private String answerText = "";
 
+    private Timer timer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +38,42 @@ public class TestGameActivity extends AppCompatActivity {
         gameController.startGame();
 
         loadView();
+        startTimer();
 
         loadDataView();
 
         loadActions();
 
+    }
+
+    private long timeCount = 0;
+
+    private void startTimer() {
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                timeCount++;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setTimeToView();
+
+                    }
+                });
+
+            }
+        }, 1000, 1000);
+    }
+
+    private void setTimeToView() {
+
+        long second = timeCount % 60;
+        long minute = timeCount / 60 % 60;
+        long hour = timeCount / 60 / 60 % 24;
+
+        String result = String.format("%02d:%02d:%02d", hour, minute, second);
+        timeView.setText(result);
     }
 
     private void loadActions() {
@@ -54,7 +89,7 @@ public class TestGameActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                Bu yerda tekshiriladi
 
-                if(gameController.isFinished()) {
+                if (gameController.isFinished()) {
                     // Yangi oyna ochib oxirgi malumotlarni ko'rsatishimiz kerak!
                     startResultsActivity();
                     return;
@@ -62,21 +97,18 @@ public class TestGameActivity extends AppCompatActivity {
 
                 if (answerText.isEmpty()) {
                     Toast.makeText(TestGameActivity.this, "At first, You should choose one answer!!!", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     boolean isFind = gameController.checkAnswer(answerText);
 
-                    if(isFind){
+                    if (isFind) {
                         Toast.makeText(TestGameActivity.this, "Good baby", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         Toast.makeText(TestGameActivity.this, "Bad baby", Toast.LENGTH_SHORT).show();
                     }
 
-                    if(!gameController.isFinished()) {
+                    if (!gameController.isFinished()) {
                         loadDataView();
-                    }
-                    else {
+                    } else {
                         nextButton.setText("FINISH");
                     }
 
@@ -126,8 +158,7 @@ public class TestGameActivity extends AppCompatActivity {
 
                     }
                 });
-            }
-            else {
+            } else {
                 answerButton.setText(" ");
                 answerButton.setVisibility(View.GONE);
             }
@@ -166,4 +197,11 @@ public class TestGameActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        timer.cancel();
+
+        System.out.println("Hello: onStop Method");
+    }
 }
